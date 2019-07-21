@@ -7,18 +7,22 @@ This is a chatops project that uses opsdroid and Rubrik SDK for Python to makes 
 
 Install opsdroid from pip:
 
-`pip install opsdroid`
-`opsdroid`
+```
+$ pip install opsdroid
+$ opsdroid
+```
 
 Modify the opsdroid configuration.yaml file and select your desired chat service e.g. to use Slack provide an API token.
 Add the rubrik skill to the opsdroid configuration.yaml file e.g.
-`  ## Rubrik CDM vsphere mount`
-`  - name: rubrik`
-`    rubrik_cdm_node_ip: '10.10.10.10'`
-`    rubrik_cdm_password: 'password'`
-`    rubrik_cdm_username: 'python-sdk@rubrik.com'`
-`    path: '/path/to/the/gitrepo/clone'`
-`    no-cache: True`
+```
+  ## Rubrik CDM vsphere mount
+  - name: rubrik
+    rubrik_cdm_node_ip: '10.10.10.10'
+    rubrik_cdm_password: 'password'
+    rubrik_cdm_username: 'python-sdk@rubrik.com'
+    path: '/path/to/the/gitrepo/clone'
+    no-cache: True
+```
 
 Clone this repository and run the 'opsdroid' command. 
 
