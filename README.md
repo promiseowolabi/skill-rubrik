@@ -15,7 +15,7 @@ $ opsdroid
 Modify the opsdroid configuration.yaml file and select your desired chat service e.g. to use Slack provide an API token.
 Add the rubrik skill to the opsdroid configuration.yaml file e.g.
 ```
-  ## Rubrik CDM vsphere mount
+  ## Rubrik CDM skill
   - name: rubrik
     rubrik_cdm_node_ip: '10.10.10.10'
     rubrik_cdm_password: 'password'
