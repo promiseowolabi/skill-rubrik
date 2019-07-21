@@ -33,4 +33,11 @@ class RubrikSkill(Skill):
         sql_host = sql_host[4:-4]
         rubrik = rubrik_cdm.Connect()
         rubrik.sql_live_mount(db_name, date, time, sql_instance, sql_host, mount_name)
-        await message.respond('All done! {} has been live mounted as {}'.format(db_name, mount_name)) 
+        await message.respond('All done! {} has been live mounted as {}'.format(db_name, mount_name))
+
+    @match_regex('unmount db (?P<mounted_db_name>[\w\'-:\s]+)')
+    async def sqlliveunmount(self, message):
+        mounted_db_name = message.regex.group('mounted_db_name')
+        rubrik = rubrik_cdm.Connect()
+        rubrik.sql_live_unmount(mounted_db_name)
+        await message.respond('All done! {} has been unmounted'.format(mounted_db_name))
