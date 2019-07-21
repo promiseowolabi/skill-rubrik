@@ -15,12 +15,12 @@ class RubrikSkill(Skill):
         rubrik.vsphere_live_mount(vm_name)
         await message.respond('All done! {} has been live mounted'.format(vm_name))
 
-    @match_regex('unmount vm (?P<mounted_name>[\w\'-:\s]+)')
+    @match_regex('unmount vm (?P<mounted_vm_name>[\w\'-:\s]+)')
     async def vsphereliveunmount(self, message):
-        mounted_name = message.regex.group('mounted_name')
+        mounted_vm_name = message.regex.group('mounted_vm_name')
         rubrik = rubrik_cdm.Connect()
-        rubrik.vsphere_live_unmount(mounted_name)
-        await message.respond('All done! {} has been unmounted'.format(mounted_name))
+        rubrik.vsphere_live_unmount(mounted_vm_name)
+        await message.respond('All done! {} has been unmounted'.format(mounted_vm_name))
 
     @match_regex('live mount db (?P<db_name>[\w\'-]+) from date (?P<date>[\w\'-]+) on time (?P<time>[0-9:]+\s[AMP]+) as a clone called (?P<mount_name>[\w-]+) instance (?P<sql_instance>[\w-]+) host (?P<sql_host>.+)')
     async def sqllivemount(self, message):
