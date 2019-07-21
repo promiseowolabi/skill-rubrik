@@ -44,3 +44,11 @@ class RubrikSkill(Skill):
         rubrik = rubrik_cdm.Connect()
         rubrik.sql_live_unmount(mounted_db_name, sql_instance, sql_host)
         await message.respond('All done! {} has been unmounted'.format(mounted_db_name))
+    
+    @match_regex('take a snapshot of (?P<object_type>[\w\'-]+) vm (?P<vsphere_vm_name>[\w\'-]+)')
+    async def vsphereondemandsnapshot(self, message):
+        vsphere_vm_name = message.regex.group('vsphere_vm_name')
+        object_type = message.regex.group('object_type')
+        rubrik = rubrik_cdm.Connect()
+        rubrik.on_demand_snapshot(vsphere_vm_name, object_type)
+        await message.respond('All done! A snapshot of {} has been taken.'.format(vsphere_vm_name))
