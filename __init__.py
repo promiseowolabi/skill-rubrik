@@ -10,6 +10,12 @@ class RubrikSkill(Skill):
 
     @match_regex('Live mount vm (?P<vm_name>[\w\'-]+)')
     async def vspherelivemount(self, message):
+        """
+        A skills function to live mount a vSphere virtual machine using the current snapshot. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- Live mount vm {vm_name}
+        """
         vm_name = message.regex.group('vm_name')
         rubrik = rubrik_cdm.Connect()
         live_mount = rubrik.vsphere_live_mount(vm_name)
@@ -17,6 +23,12 @@ class RubrikSkill(Skill):
 
     @match_regex('Unmount vm (?P<mounted_vm_name>[\w\'-:\s]+)')
     async def vsphereliveunmount(self, message):
+        """
+        A skills function to unmount a vSphere virtual machine. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- Unmount vm {vm_name}
+        """
         mounted_vm_name = message.regex.group('mounted_vm_name')
         rubrik = rubrik_cdm.Connect()
         live_unmount = rubrik.vsphere_live_unmount(mounted_vm_name)
@@ -24,6 +36,12 @@ class RubrikSkill(Skill):
 
     @match_regex('Live mount db (?P<db_name>[\w\'-]+) from (?P<date>[\w\'-]+) at (?P<time>[0-9:]+\s[AMP]+) as (?P<mount_name>[\w-]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
     async def sqllivemount(self, message):
+        """
+        A skills function to mount a mssql database. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- Live mount db {db_name} from {date} at {time} as {mount_name} on {sql_instance} on host {<sql_host>}
+        """
         db_name = message.regex.group('db_name')
         date = message.regex.group('date')
         time = message.regex.group('time')
@@ -35,8 +53,14 @@ class RubrikSkill(Skill):
         live_mount = rubrik.sql_live_mount(db_name, date, time, sql_instance, sql_host, mount_name)
         await message.respond('All done! {} has been live mounted as {}. Response: {}'.format(db_name, mount_name, live_mount))
 
-    @match_regex('unmount db (?P<mounted_db_name>[\w\'-:\s]+) on instance (?P<sql_instance>[\w-]+) host (?P<sql_host>.+)')
+    @match_regex('Unmount db (?P<mounted_db_name>[\w\'-:\s]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
     async def sqlliveunmount(self, message):
+        """
+        A skills function to unmount an mssql db. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- Unmount db {mounted_db_name} on {sql_instance} on host {<sql_host>}
+        """
         mounted_db_name = message.regex.group('mounted_db_name')
         sql_instance = message.regex.group('sql_instance')
         sql_host = message.regex.group('sql_host')
@@ -45,8 +69,14 @@ class RubrikSkill(Skill):
         live_unmount = rubrik.sql_live_unmount(mounted_db_name, sql_instance, sql_host)
         await message.respond('All done! {} has been unmounted. Response: {}'.format(mounted_db_name, live_unmount))
     
-    @match_regex('take a snapshot of (?P<object_type>[\w\'-]+) vm (?P<vsphere_vm_name>[\w\'-]+)')
+    @match_regex('Take a snapshot of (?P<object_type>[\w\'-]+) vm (?P<vsphere_vm_name>[\w\'-]+)')
     async def vsphereondemandsnapshot(self, message):
+        """
+        A skills function to take a vSphere on-demand snapshot. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- Take a snapshot of {vmware} vm {vsphere_vm_name}
+        """
         vsphere_vm_name = message.regex.group('vsphere_vm_name')
         object_type = message.regex.group('object_type')
         rubrik = rubrik_cdm.Connect()
