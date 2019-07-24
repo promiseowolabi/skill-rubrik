@@ -42,16 +42,17 @@ Setup your chat service e.g. Slack in the configuration.yaml file:
 ```
 Clone this repository and run the 'opsdroid' command. 
 
-# :mag: Example
+# :mag: Usage
 
 These are the example messages based on regex_matches the skill will respond to:
 
-* `Take a snapshot of vmware vm {vm_name}`
-* `Take a snapshot of mssql_db {db_name} on {sql_instance} on host {sql_host}`
-* `Live mount vm {vm_name}`
-* `Live mount db {db_name} from {MM:DD:YYYY} on {HH:MM AM/PM} as {mount_name} on {sql_instance} on host {sql_host}`
-* `Unmount db {mount_name} on {sql_instance} on host {sql_host}`
-* `Unmount vm {mounted_vm_name}`
-* `Take a snapshot of ahv vm {vm_name}`
+* `take a snapshot of vmware vm {vm_name}`
+* `take a snapshot of mssql_db {db_name} on {sql_instance} on host {sql_host}`
+* `live mount vm {vm_name}`
+* `live mount db {db_name} from {MM:DD:YYYY} on {HH:MM AM/PM} as {mount_name} on {sql_instance} on host {sql_host}`
+* `unmount db {mount_name} on {sql_instance} on host {sql_host}`
+* `unmount vm {mounted_vm_name}`
+* `take a snapshot of ahv vm {vm_name}`
 
-The syntax above uses regex for matching your messages to the skill
+_Note: The message must match the syntax above including letter case.
+_Slack: Encase your hostname in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause sql_host not found errors.

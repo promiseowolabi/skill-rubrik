@@ -8,7 +8,7 @@ class RubrikSkill(Skill):
     def __init__(self, opsdroid, config):
         super(RubrikSkill, self).__init__(opsdroid, config)
 
-    @match_regex('Live mount vm (?P<vm_name>[\w\'-]+)')
+    @match_regex('live mount vm (?P<vm_name>[\w\'-]+)')
     async def vspherelivemount(self, message):
         """
         A skills function to live mount a vSphere virtual machine using the current snapshot. The parser looks for the message argument.
@@ -21,7 +21,7 @@ class RubrikSkill(Skill):
         live_mount = rubrik.vsphere_live_mount(vm_name)
         await message.respond('All done! {} has been live mounted. Response: {}'.format(vm_name, live_mount))
 
-    @match_regex('Unmount vm (?P<mounted_vm_name>[\w\'-:\s]+)')
+    @match_regex('unmount vm (?P<mounted_vm_name>[\w\'-:\s]+)')
     async def vsphereliveunmount(self, message):
         """
         A skills function to unmount a vSphere virtual machine. The parser looks for the message argument.
@@ -34,7 +34,7 @@ class RubrikSkill(Skill):
         live_unmount = rubrik.vsphere_live_unmount(mounted_vm_name)
         await message.respond('All done! {} has been unmounted. Response: {}'.format(mounted_vm_name, live_unmount))
 
-    @match_regex('Live mount db (?P<db_name>[\w\'-]+) from (?P<date>[\w\'-]+) at (?P<time>[0-9:]+\s[AMP]+) as (?P<mount_name>[\w-]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
+    @match_regex('live mount db (?P<db_name>[\w\'-]+) from (?P<date>[\w\'-]+) at (?P<time>[0-9:]+\s[AMP]+) as (?P<mount_name>[\w-]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
     async def sqllivemount(self, message):
         """
         A skills function to mount a mssql database. The parser looks for the message argument.
@@ -53,7 +53,7 @@ class RubrikSkill(Skill):
         live_mount = rubrik.sql_live_mount(db_name, date, time, sql_instance, sql_host, mount_name)
         await message.respond('All done! {} has been live mounted as {}. Response: {}'.format(db_name, mount_name, live_mount))
 
-    @match_regex('Unmount db (?P<mounted_db_name>[\w\'-:\s]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
+    @match_regex('unmount db (?P<mounted_db_name>[\w\'-:\s]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
     async def sqlliveunmount(self, message):
         """
         A skills function to unmount an mssql db. The parser looks for the message argument.
@@ -69,8 +69,8 @@ class RubrikSkill(Skill):
         live_unmount = rubrik.sql_live_unmount(mounted_db_name, sql_instance, sql_host)
         await message.respond('All done! {} has been unmounted. Response: {}'.format(mounted_db_name, live_unmount))
     
-    @match_regex('Take a snapshot of (?P<object_type>[\w\'-]+) vm (?P<object_name>[\w\'-]+)')
-    @match_regex('Take a snapshot of (?P<object_type>[\w\'-]+) (?P<object_name>[\w\'-]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
+    @match_regex('take a snapshot of (?P<object_type>[\w\'-]+) vm (?P<object_name>[\w\'-]+)')
+    @match_regex('take a snapshot of (?P<object_type>[\w\'-]+) (?P<object_name>[\w\'-]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
     async def vsphereondemandsnapshot(self, message):
         """
         A skills function to take an on-demand snapshot using the current sla. The parser looks for the message argument.
