@@ -46,10 +46,11 @@ Clone this repository and run the 'opsdroid' command.
 
 These are the example messages based on regex_matches the skill will respond to:
 
-* `take a snapshot of vmware vm em1-promowol-l1`
-* `live mount vm em1-promowol-l1`
-* `live mount db AdventureWorks2016 from date 07-19-2019 on time 01:30 AM as a clone called AdventureClone instance MSSQLSERVER host <em1-promowol-w1.rubrikdemo.com>`
-* `unmount db AdventureClone on instance MSSQLSERVER host <em1-promowol-w1.rubrikdemo.com>`
-* `unmount vm em1-promowol-l1 07-21 10:17 0`
+* `Take a snapshot of vmware vm {vm_name}`
+* `Take a snapshot of mssql_db {db_name} on {sql_instance} on host {sql_host}`
+* `Live mount vm {vm_name}`
+* `Live mount db {db_name} from {MM:DD:YYYY} on {HH:MM AM/PM} as {mount_name} on {sql_instance} on host {sql_host}`
+* `Unmount db {mount_name} on {sql_instance} on host {sql_host}`
+* `Unmount vm {mounted_vm_name}`
 
 The syntax above uses regex for matching your messages to the skill
