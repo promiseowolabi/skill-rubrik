@@ -69,16 +69,29 @@ class RubrikSkill(Skill):
         live_unmount = rubrik.sql_live_unmount(mounted_db_name, sql_instance, sql_host)
         await message.respond('All done! {} has been unmounted. Response: {}'.format(mounted_db_name, live_unmount))
     
-    @match_regex('Take a snapshot of (?P<object_type>[\w\'-]+) vm (?P<vsphere_vm_name>[\w\'-]+)')
+    @match_regex('Take a snapshot of (?P<object_type>[\w\'-]+) vm (?P<object_name>[\w\'-]+)')
+    @match_regex('Take a snapshot of (?P<object_type>[\w\'-]+) (?P<object_name>[\w\'-]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
     async def vsphereondemandsnapshot(self, message):
         """
-        A skills function to take a vSphere on-demand snapshot. The parser looks for the message argument.
+        A skills function to take an on-demand snapshot. The parser looks for the message argument.
 
         Arguments:
-            message {str} -- Take a snapshot of {vmware} vm {vsphere_vm_name}
+            message {str} -- Take a snapshot of {vmware} {vm} {vm_name}
+                          -- Take a snapshot of {mssql_db} {db_name} on {sql_instance} on host {sql_host}
         """
-        vsphere_vm_name = message.regex.group('vsphere_vm_name')
+
         object_type = message.regex.group('object_type')
         rubrik = rubrik_cdm.Connect()
-        snapshot = rubrik.on_demand_snapshot(vsphere_vm_name, object_type)
-        await message.respond('All done! A snapshot of {} has been taken. Response: {}'.format(vsphere_vm_name, snapshot))
+        
+        if object_type == 'vmware' or object_type == 'ahv':
+            vm_name = message.regex.group('object_name')
+            snapshot = rubrik.on_demand_snapshot(vm_name, object_type)
+        else:
+            db_name = message.regex.group('object_name')
+            sql_db = message.regex.group('object_name')
+            sql_instance = message.regex.group('sql_instance')
+            sql_host = message.regex.group('sql_host')
+            sql_host = sql_host[4:-4]
+            snapshot = rubrik.on_demand_snapshot(db_name, object_type, sql_host=sql_host, sql_instance=sql_instance, sql_db=sql_db)
+        
+        await message.respond('All done! A snapshot of {} has been taken. Response: {}'.format(db_name, snapshot))
