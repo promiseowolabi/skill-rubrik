@@ -1,6 +1,6 @@
 # OPSDROID Rubrik skill
 
-This is a chatops project that uses opsdroid and Rubrik SDK for Python to makes it easy to interact with the Rubrik CDM API.
+This is a chatops project that uses opsdroid and Rubrik SDK for Python to make it easy to interact with the Rubrik CDM API.
 
 
 # :hammer: Installation
