@@ -73,7 +73,7 @@ class RubrikSkill(Skill):
     @match_regex('Take a snapshot of (?P<object_type>[\w\'-]+) (?P<object_name>[\w\'-]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
     async def vsphereondemandsnapshot(self, message):
         """
-        A skills function to take an on-demand snapshot. The parser looks for the message argument.
+        A skills function to take an on-demand snapshot using the current sla. The parser looks for the message argument.
 
         Arguments:
             message {str} -- Take a snapshot of {vmware} {vm} {vm_name}

@@ -52,5 +52,6 @@ These are the example messages based on regex_matches the skill will respond to:
 * `Live mount db {db_name} from {MM:DD:YYYY} on {HH:MM AM/PM} as {mount_name} on {sql_instance} on host {sql_host}`
 * `Unmount db {mount_name} on {sql_instance} on host {sql_host}`
 * `Unmount vm {mounted_vm_name}`
+* `Take a snapshot of ahv vm {vm_name}`
 
 The syntax above uses regex for matching your messages to the skill
