@@ -54,5 +54,6 @@ These are the example messages based on regex_matches the skill will respond to:
 * `unmount vm {mounted_vm_name}`
 * `take a snapshot of ahv vm {vm_name}`
 
-_Note: The message must match the syntax above including letter case.
-_Slack: Encase your hostname in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause sql_host not found errors.
+Slack: Encase your hostname in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause sql_host not found errors.
+_Note: The message must match the syntax above including letter case._
+
