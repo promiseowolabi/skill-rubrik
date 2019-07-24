@@ -3,8 +3,16 @@ from opsdroid.matchers import match_regex
 import rubrik_cdm
 
 
+def _hostname_to_text(hostname):
+    if hostname[:4] == '&lt;': 
+        hostname = hostname[4:-4]
+        return hostname
+    else:
+        return hostname
+        
 class RubrikSkill(Skill):
 
+    
     def __init__(self, opsdroid, config):
         super(RubrikSkill, self).__init__(opsdroid, config)
 
@@ -14,7 +22,7 @@ class RubrikSkill(Skill):
         A skills function to live mount a vSphere virtual machine using the current snapshot. The parser looks for the message argument.
 
         Arguments:
-            message {str} -- Live mount vm {vm_name}
+            message {str} -- live mount vm {vm_name}
         """
         vm_name = message.regex.group('vm_name')
         rubrik = rubrik_cdm.Connect()
@@ -27,7 +35,7 @@ class RubrikSkill(Skill):
         A skills function to unmount a vSphere virtual machine. The parser looks for the message argument.
 
         Arguments:
-            message {str} -- Unmount vm {vm_name}
+            message {str} -- unmount vm {vm_name}
         """
         mounted_vm_name = message.regex.group('mounted_vm_name')
         rubrik = rubrik_cdm.Connect()
@@ -40,15 +48,15 @@ class RubrikSkill(Skill):
         A skills function to mount a mssql database. The parser looks for the message argument.
 
         Arguments:
-            message {str} -- Live mount db {db_name} from {date} at {time} as {mount_name} on {sql_instance} on host {<sql_host>}
+            message {str} -- live mount db {db_name} from {date} at {time} as {mount_name} on {sql_instance} on host {<sql_host>}
         """
         db_name = message.regex.group('db_name')
         date = message.regex.group('date')
         time = message.regex.group('time')
         mount_name = message.regex.group('mount_name')       
         sql_instance = message.regex.group('sql_instance')
-        sql_host = message.regex.group('sql_host')
-        sql_host = sql_host[4:-4]
+        sql_hostname = message.regex.group('sql_host')
+        sql_host = _hostname_to_text(sql_hostname)
         rubrik = rubrik_cdm.Connect()
         live_mount = rubrik.sql_live_mount(db_name, date, time, sql_instance, sql_host, mount_name)
         await message.respond('All done! {} has been live mounted as {}. Response: {}'.format(db_name, mount_name, live_mount))
@@ -59,7 +67,7 @@ class RubrikSkill(Skill):
         A skills function to unmount an mssql db. The parser looks for the message argument.
 
         Arguments:
-            message {str} -- Unmount db {mounted_db_name} on {sql_instance} on host {<sql_host>}
+            message {str} -- unmount db {mounted_db_name} on {sql_instance} on host {<sql_host>}
         """
         mounted_db_name = message.regex.group('mounted_db_name')
         sql_instance = message.regex.group('sql_instance')
@@ -76,8 +84,8 @@ class RubrikSkill(Skill):
         A skills function to take an on-demand snapshot using the current sla. The parser looks for the message argument.
 
         Arguments:
-            message {str} -- Take a snapshot of {vmware} {vm} {vm_name}
-                          -- Take a snapshot of {mssql_db} {db_name} on {sql_instance} on host {sql_host}
+            message {str} -- take a snapshot of {vmware} {vm} {vm_name}
+                          -- take a snapshot of {mssql_db} {db_name} on {sql_instance} on host {sql_host}
         """
 
         object_type = message.regex.group('object_type')
@@ -91,10 +99,33 @@ class RubrikSkill(Skill):
             sql_db = message.regex.group('object_name')
             sql_instance = message.regex.group('sql_instance')
             sql_hostname = message.regex.group('sql_host')
-            if sql_hostname[:4] == '&lt;': # Parsing out the unfurling sql_host string from slack e.g. '&lt;em1-promowol-w1.rubrikdemo.com&gt;'
-                sql_host = sql_hostname[4:-4]
-            else:
-                sql_host = sql_hostname
+            sql_host = _hostname_to_text(sql_hostname)
             snapshot = rubrik.on_demand_snapshot(db_name, object_type, sql_host=sql_host, sql_instance=sql_instance, sql_db=sql_db)
         
         await message.respond('All done! A snapshot of {} has been taken. Response: {}'.format(db_name, snapshot))
+
+    @match_regex('add physical host (?P<hostname>.+)')
+    async def addphysicalhost(self, message):
+        """
+        A skills function to add a physical host. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- add physical host {hostname}
+        """
+        host = message.regex.group('hostname')
+        hostname = _hostname_to_text(host)
+        rubrik = rubrik_cdm.Connect()
+        add_host = rubrik.add_physical_host(hostname)
+        await message.respond('All done! Physical host {} has been added. Response: {}'.format(hostname, add_host))
+
+    @match_regex('get rubrik cluster version')
+    async def getclusterversion(self, message):
+        """
+        A skills function to get the rubrik cluster version. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get rubrik cluster version
+        """
+        rubrik = rubrik_cdm.Connect()
+        version = rubrik.cluster_version()
+        await message.respond('All done! The current Rubrik cluster version is: {}'.format(version))

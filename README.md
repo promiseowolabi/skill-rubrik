@@ -53,8 +53,10 @@ These are the example messages based on regex_matches the skill will respond to:
 * `unmount db {mount_name} on {sql_instance} on host {sql_host}`
 * `unmount vm {mounted_vm_name}`
 * `take a snapshot of ahv vm {vm_name}`
+* `add physical host {hostname}`
+* `get rubrik cluster version`
 
-Slack: Encase your hostname in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause sql_host not found errors.
+Slack: Enclose {hostname|sql_host} in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause sql_host not found errors.
 
 #### Note: The message must match the syntax above including letter case.
 
