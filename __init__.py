@@ -90,8 +90,11 @@ class RubrikSkill(Skill):
             db_name = message.regex.group('object_name')
             sql_db = message.regex.group('object_name')
             sql_instance = message.regex.group('sql_instance')
-            sql_host = message.regex.group('sql_host')
-            sql_host = sql_host[4:-4]
+            sql_hostname = message.regex.group('sql_host')
+            if sql_hostname[:4] == '&lt;': # Parsing out the unfurling sql_host string from slack e.g. '&lt;em1-promowol-w1.rubrikdemo.com&gt;'
+                sql_host = sql_hostname[4:-4]
+            else:
+                sql_host = sql_hostname
             snapshot = rubrik.on_demand_snapshot(db_name, object_type, sql_host=sql_host, sql_instance=sql_instance, sql_db=sql_db)
         
         await message.respond('All done! A snapshot of {} has been taken. Response: {}'.format(db_name, snapshot))
