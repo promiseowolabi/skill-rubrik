@@ -14,14 +14,15 @@ $ opsdroid
 
 ## :blue_book: Configuration
 Modify the opsdroid configuration.yaml file and select your desired chat service e.g. to use Slack provide a slack API token.
+The configuration file can be found in the '/Users/{your_user}/Library/Application Support/opsdroid' directory on Mac.
 Add the rubrik skill to the opsdroid configuration.yaml file e.g.
 ```
-  ## Rubrik CDM skill
+  ## Interact with Rubrik CDM API
   - name: rubrik
     rubrik_cdm_node_ip: '10.10.10.10'
     rubrik_cdm_password: 'password'
     rubrik_cdm_username: 'python-sdk@rubrik.com'
-    path: https://github.com/promiseowolabi/skill-rubrik.git
+    repo: https://github.com/promiseowolabi/skill-rubrik.git
     no-cache: True
 ```
 Uncomment Regex for parsing in the configuration.yaml file:
@@ -40,7 +41,6 @@ Setup your chat service e.g. Slack in the configuration.yaml file:
     icon-emoji: ":robot_face:" # default ":robot_face:"
     connect-timeout: 10 # default 10 seconds
 ```
-Clone this repository and run the 'opsdroid' command. 
 
 # :mag: Usage
 
