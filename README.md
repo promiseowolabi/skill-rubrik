@@ -9,6 +9,8 @@ Install opsdroid from pip:
 
 ```
 $ pip install opsdroid
+
+#run the opsdroid command to create the configuration files
 $ opsdroid
 ```
 
