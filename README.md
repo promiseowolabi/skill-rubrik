@@ -63,5 +63,5 @@ These are the example messages based on regex_matches the skill will respond to:
 
 Slack: Enclose hostname/sql_host values in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause hostname not found errors.
 
-#### Note: The message must match the syntax above including letter case.
+#### Note: The messages must match the syntax above including letter cases.
 
