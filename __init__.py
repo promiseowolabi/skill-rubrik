@@ -129,3 +129,16 @@ class RubrikSkill(Skill):
         rubrik = rubrik_cdm.Connect()
         version = rubrik.cluster_version()
         await message.respond('All done! The current Rubrik cluster version is: {}'.format(version))
+    
+    @match_regex('get vmware VMs protected by (?P<sla>[\w\'-]+)')
+    async def objectsinsla(self, message):
+        """
+        A skills function to get the objects protected by a Rubrik SLA. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get vmware VMs protected by {sla}
+        """
+        rubrik = rubrik_cdm.Connect()
+        sla = message.regex.group('sla')
+        objects_in_sla = rubrik.get_sla_objects(sla)
+        await message.respond('All done! The current objects protected by SLA {} are: {}'.format(sla, objects_in_sla))
