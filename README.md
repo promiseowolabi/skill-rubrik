@@ -21,7 +21,7 @@ Add the rubrik skill to the opsdroid configuration.yaml file e.g.
     rubrik_cdm_node_ip: '10.10.10.10'
     rubrik_cdm_password: 'password'
     rubrik_cdm_username: 'python-sdk@rubrik.com'
-    path: '/path/to/the/gitrepo/clone'
+    path: https://github.com/promiseowolabi/skill-rubrik.git
     no-cache: True
 ```
 Uncomment Regex for parsing in the configuration.yaml file:
