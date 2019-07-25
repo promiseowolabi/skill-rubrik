@@ -36,7 +36,7 @@ Setup your chat service e.g. Slack in the configuration.yaml file:
 ```
   - name: slack
     # required
-    api-token: "xxxx-xxxxxxxxxx-xxxxxxxxx-xxxxxxxx-xxxxxxxxxxxxxxxx"
+    api-token: "your-slack-token-goes-here"
     # optional
     bot-name: "opsdroid" # default "opsdroid"
     default-room: "#chatops" # default "#general"
@@ -61,7 +61,7 @@ These are the example messages based on regex_matches the skill will respond to:
 * `perform instant recovery of vmware VM {vm_name} from {MM-DD-YYYY} at {HH:MM AM/PM}`
 * `perform instant recovery of vmware VM {vm_name}`
 
-Slack: Enclose {hostname|sql_host} in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause sql_host not found errors.
+Slack: Enclose hostname/sql_host values in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause hostname not found errors.
 
 #### Note: The message must match the syntax above including letter case.
 
