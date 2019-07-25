@@ -139,6 +139,35 @@ class RubrikSkill(Skill):
             message {str} -- get vmware VMs protected by {sla}
         """
         rubrik = rubrik_cdm.Connect()
+        object_type = 'vmware'
         sla = message.regex.group('sla')
-        objects_in_sla = rubrik.get_sla_objects(sla)
-        await message.respond('All done! The current objects protected by SLA {} are: {}'.format(sla, objects_in_sla))
+        objects_in_sla = rubrik.get_sla_objects(sla, object_type)
+        await message.respond('All done! The current VMs protected by SLA {} are: {}'.format(sla, objects_in_sla))
+
+    @match_regex('perform instant recovery of vmware VM (?P<vm_name>[\w\'-]+)')
+    async def vsphereinstantrecoverylatest(self, message):
+        """
+        A skills function to perform vmware instant recovery. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- perform instant recovery of vmware VM {vm_name}
+        """
+        rubrik = rubrik_cdm.Connect()
+        vm_name = message.regex.group('vm_name')
+        instant_recovery = rubrik.vsphere_instant_recovery(vm_name)
+        await message.respond('All done! {} has been recovered from the latest snapshot. Response: {}'.format(vm_name, instant_recovery))
+    
+    @match_regex('perform instant recovery of vmware VM (?P<vm_name>[\w\'-]+) from (?P<date>[\w\'-]+) at (?P<time>[0-9:]+\s[AMP]+)')
+    async def vsphereinstantrecovery(self, message):
+        """
+        A skills function to perform vmware instant recovery. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- perform instant recovery of vmware VM {vm_name} from {date} at {time}
+        """
+        rubrik = rubrik_cdm.Connect()
+        vm_name = message.regex.group('vm_name')
+        date = message.regex.group('date')
+        time = message.regex.group('time')
+        instant_recovery = rubrik.vsphere_instant_recovery(vm_name, date, time)
+        await message.respond('All done! {} has been recovered to {} at {}. Response: {}'.format(vm_name, date, time, instant_recovery))

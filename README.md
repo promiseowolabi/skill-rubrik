@@ -49,12 +49,15 @@ These are the example messages based on regex_matches the skill will respond to:
 * `take a snapshot of vmware vm {vm_name}`
 * `take a snapshot of mssql_db {db_name} on {sql_instance} on host {sql_host}`
 * `live mount vm {vm_name}`
-* `live mount db {db_name} from {MM:DD:YYYY} on {HH:MM AM/PM} as {mount_name} on {sql_instance} on host {sql_host}`
+* `live mount db {db_name} from {MM-DD-YYYY} on {HH:MM AM/PM} as {mount_name} on {sql_instance} on host {sql_host}`
 * `unmount db {mount_name} on {sql_instance} on host {sql_host}`
 * `unmount vm {mounted_vm_name}`
 * `take a snapshot of ahv vm {vm_name}`
 * `add physical host {hostname}`
 * `get rubrik cluster version`
+* `get vmware VMs protected by {sla}`
+* `perform instant recovery of vmware VM {vm_name} from {MM-DD-YYYY} at {HH:MM AM/PM}`
+* `perform instant recovery of vmware VM {vm_name}`
 
 Slack: Enclose {hostname|sql_host} in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause sql_host not found errors.
 
