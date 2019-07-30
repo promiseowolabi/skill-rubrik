@@ -1,14 +1,19 @@
-# Rubrik Skill for Opsdroid
+# Quick Start Guide
+
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
+* [Configuration](#configuration)
+* [Usage](#usage)
 
 This is an OPSDROID skill for chatOps using the Rubrik SDK for Python to make it easy to interact with Rubrik CDM API. Opsdroid is an open source chat bot framework written in Python. It is designed to be extendable, scalable and simple.
 
 
-# :traffic_light: Prerequisites
+# Prerequisites
 
 * `Python 3`
 * `Rubrik SDK for Python`
 
-# :hammer: Installation
+# Installation
 
 Install opsdroid from pip:
 
@@ -20,7 +25,7 @@ $ pip install opsdroid
 $ opsdroid
 ```
 
-## :blue_book: Configuration
+## Configuration
 Modify the opsdroid configuration.yaml file and make sure it contians the following 
 * `A desired chat service e.g. to use Slack provide a slack API token.`
 * `Rubrik skill`
@@ -68,7 +73,7 @@ Setup your chat service e.g. Slack in the configuration.yaml file:
     connect-timeout: 10 # default 10 seconds
 ```
 
-# :mag: Usage
+## Usage
 
 These are the example messages based on regex_matches the skill will respond to:
 
@@ -89,7 +94,4 @@ Slack: Enclose hostname/sql_host values in < > i.e. <sqlhost.rubrikdemo.com> to 
 
 #### Note: The messages must match the syntax above including letter cases.
 
-# :pushpin: License
-
-* [MIT License](LICENSE)
 
