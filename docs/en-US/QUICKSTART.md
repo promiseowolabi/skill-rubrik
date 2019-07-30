@@ -26,9 +26,10 @@ $ opsdroid
 ```
 
 ## Configuration
-Modify the opsdroid configuration.yaml file and make sure it contians the following 
-* `A desired chat service e.g. to use Slack provide a slack API token.`
-* `Rubrik skill`
+Modify the opsdroid configuration.yaml file and make sure it contains the following: 
+* `Chat service e.g. Slack`
+* `Rubrik skill added to the skills section`
+* `Regex enabled, for parsing messages`
 
 For configuration, opsdroid uses a single YAML file named configuration.yaml. When you run opsdroid it will look for the file in the following places in order:
 
@@ -93,5 +94,3 @@ These are the example messages based on regex_matches the skill will respond to:
 Slack: Enclose hostname/sql_host values in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause hostname not found errors.
 
 #### Note: The messages must match the syntax above including letter cases.
-
-
