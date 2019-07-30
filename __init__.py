@@ -3,6 +3,7 @@ from opsdroid.matchers import match_regex
 import rubrik_cdm
 import urllib3
 
+# To enable certificate warnings comment the line below:
 urllib3.disable_warnings()
 
 def _hostname_to_text(hostname):
