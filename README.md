@@ -50,6 +50,7 @@ Add the rubrik skill to the opsdroid configuration.yaml file e.g.
 ```
 Uncomment Regex for parsing in the configuration.yaml file:
 ```
+parsers:
   - name: regex
     enabled: true
 ```
