@@ -38,7 +38,7 @@ Note: If no file named configuration.yaml can be found on one of these folders o
 
 If you are using one of the default locations you can run the command opsdroid -e or opsdroid --edit-config to open the configuration with your favorite editor(taken from the environment variable EDITOR) or the default editor vim.
 
-Ensure that the Environmental Variable for the Rubrik Cluster have been setup. See https://github.com/rubrikinc/rubrik-sdk-for-python/blob/master/docs/quick-start.md#setting-environment-variables-in-microsoft-windows
+Ensure that the Environmental Variables for the Rubrik Cluster have been setup. See https://github.com/rubrikinc/rubrik-sdk-for-python/blob/master/docs/quick-start.md#setting-environment-variables-in-microsoft-windows
 
 Then add the rubrik skill to the skill section of the opsdroid configuration.yaml file.
 ```
