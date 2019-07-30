@@ -1,7 +1,9 @@
 from opsdroid.skill import Skill
 from opsdroid.matchers import match_regex
 import rubrik_cdm
+import urllib3
 
+urllib3.disable_warnings()
 
 def _hostname_to_text(hostname):
     if hostname[:4] == '&lt;': 
