@@ -71,3 +71,7 @@ Slack: Enclose hostname/sql_host values in < > i.e. <sqlhost.rubrikdemo.com> to 
 
 #### Note: The messages must match the syntax above including letter cases.
 
+# :pushpin: License
+
+* [MIT License](LICENSE)
+
