@@ -5,7 +5,7 @@
 * [Configuration](#configuration)
 * [Usage](#usage)
 
-This is an OPSDROID skill for chatOps using the Rubrik SDK for Python to make it easy to interact with Rubrik CDM API. Opsdroid is an open source chat bot framework written in Python. It is designed to be extendable, scalable and simple.
+This is an OPSDROID skill for ChatOps using the Rubrik SDK for Python to make it easy to interact with Rubrik CDM API. Opsdroid is an open source chat bot framework written in Python. It is designed to be extendable, scalable and simple.
 
 
 # Prerequisites
