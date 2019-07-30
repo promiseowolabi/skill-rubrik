@@ -38,13 +38,15 @@ Note: If no file named configuration.yaml can be found on one of these folders o
 
 If you are using one of the default locations you can run the command opsdroid -e or opsdroid --edit-config to open the configuration with your favorite editor(taken from the environment variable EDITOR) or the default editor vim.
 
-Add the rubrik skill to the opsdroid configuration.yaml file e.g.
+Ensure that the Environmental Variable for the Rubrik Cluster have been setup. See https://github.com/rubrikinc/rubrik-sdk-for-python/blob/master/docs/quick-start.md#setting-environment-variables-in-microsoft-windows
+
+Then add the rubrik skill to the skill section of the opsdroid configuration.yaml file.
 ```
   ## Interact with Rubrik CDM API
   - name: rubrik
-    rubrik_cdm_node_ip: '10.10.10.10'
-    rubrik_cdm_password: 'password'
-    rubrik_cdm_username: 'python-sdk@rubrik.com'
+    rubrik_cdm_node_ip: $rubrik_cdm_node_ip
+    rubrik_cdm_password: $rubrik_cdm_password
+    rubrik_cdm_username: $rubrik_cdm_username
     repo: https://github.com/promiseowolabi/skill-rubrik.git
     no-cache: True
 ```
