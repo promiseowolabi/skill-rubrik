@@ -21,8 +21,23 @@ $ opsdroid
 ```
 
 ## :blue_book: Configuration
-Modify the opsdroid configuration.yaml file and select your desired chat service e.g. to use Slack provide a slack API token.
-The configuration file can be found in the '/Users/{your_user}/Library/Application Support/opsdroid' directory on Mac.
+Modify the opsdroid configuration.yaml file and make sure it contians the following 
+* `A desired chat service e.g. to use Slack provide a slack API token.`
+* `Rubrik skill`
+
+For configuration, opsdroid uses a single YAML file named configuration.yaml. When you run opsdroid it will look for the file in the following places in order:
+
+* `./configuration.yaml`
+* `/etc/opsdroid/configuration.yaml`
+One of the default locations:
+* `Mac: ~/Library/Application Support/opsdroid`
+* `Linux: ~/.local/share/opsdroid` or `~/.config/opsdroid`
+* `Windows: C:\<User>\<Application Data>\<Local Settings>\opsdroid\ or  C:\Users\<User>\AppData\Local\opsdroid`
+
+Note: If no file named configuration.yaml can be found on one of these folders one will be created for you taken from the example configuration file.
+
+If you are using one of the default locations you can run the command opsdroid -e or opsdroid --edit-config to open the configuration with your favorite editor(taken from the environment variable EDITOR) or the default editor vim.
+
 Add the rubrik skill to the opsdroid configuration.yaml file e.g.
 ```
   ## Interact with Rubrik CDM API
