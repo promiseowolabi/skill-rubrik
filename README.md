@@ -1,7 +1,12 @@
-# OPSDROID Rubrik skill
+# Quick Start Guide 
 
-This is a chatops project that uses opsdroid and Rubrik SDK for Python to make it easy to interact with the Rubrik CDM API.
+This is an OPSDROID skill for chatOps using the Rubrik SDK for Python to make it easy to interact with Rubrik CDM API. Opsdroid is an open source chat bot framework written in Python. It is designed to be extendable, scalable and simple.
 
+
+# :traffic_light: Prerequisites
+
+* `Python 3`
+* `Rubrik SDK for Python`
 
 # :hammer: Installation
 
@@ -11,6 +16,7 @@ Install opsdroid from pip:
 $ pip install opsdroid
 
 #run the opsdroid command to create the configuration files
+
 $ opsdroid
 ```
 
