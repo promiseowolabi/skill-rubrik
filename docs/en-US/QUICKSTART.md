@@ -19,6 +19,7 @@ Install opsdroid from pip:
 
 ```
 $ pip install opsdroid
+$ pip install rubrik-cdm
 
 #run the opsdroid command to create the configuration files
 
