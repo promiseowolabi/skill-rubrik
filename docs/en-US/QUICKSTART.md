@@ -23,6 +23,8 @@ $ pip install opsdroid
 #run the opsdroid command to create the configuration files
 
 $ opsdroid
+
+# Stop opsdroid  with Ctrl + C to modify the configuration
 ```
 
 ## Configuration
@@ -73,10 +75,13 @@ Setup your chat service e.g. Slack in the configuration.yaml file:
     icon-emoji: ":robot_face:" # default ":robot_face:"
     connect-timeout: 10 # default 10 seconds
 ```
-
+Start opsdroid after you complete the configuration
+```
+$ opsdroid
+```
 ## Usage
 
-These are the example messages based on regex_matches the skill will respond to:
+On you chosen chat service, these are the example messages based on regex_matches the skill will respond to:
 
 * `take a snapshot of vmware vm {vm_name}`
 * `take a snapshot of mssql_db {db_name} on {sql_instance} on host {sql_host}`
