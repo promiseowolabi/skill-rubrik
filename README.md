@@ -4,12 +4,12 @@ This is an OPSDROID skill for ChatOps using the Rubrik SDK for Python to make it
 
 ![alt text](/img/demo.png)
 
-# :traffic_light: Prerequisites
+## :traffic_light: Prerequisites
 
 * `Python 3`
 * `Rubrik SDK for Python`
 
-# :hammer: Installation
+## :hammer: Installation
 
 Install opsdroid from pip:
 
@@ -97,7 +97,7 @@ Slack: Enclose hostname/sql_host values in < > i.e. <sqlhost.rubrikdemo.com> to 
 
 #### Note: The messages must match the syntax above including letter cases.
 
-# :pushpin: License
+## :pushpin: License
 
 * [MIT License](LICENSE)
 
