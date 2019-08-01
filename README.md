@@ -76,7 +76,7 @@ Start opsdroid after you complete the configuration
 ```
 $ opsdroid
 ```
-## Usage
+## :mag: Usage
 
 On you chosen chat service, these are the example messages based on regex_matches the skill will respond to:
 
