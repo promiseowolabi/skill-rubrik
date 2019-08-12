@@ -1,5 +1,3 @@
-# An opsdroid skill to interact with Rubrik CDM API
-# Requires the cluster credentials to be configure as environment variable i.e. hostname, username, password
 from opsdroid.skill import Skill
 from opsdroid.matchers import match_regex
 import rubrik_cdm
