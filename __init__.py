@@ -175,16 +175,30 @@ class RubrikSkill(Skill):
         instant_recovery = rubrik.vsphere_instant_recovery(vm_name, date, time)
         await message.respond('All done! {} has been recovered to {} at {}. Response: {}'.format(vm_name, date, time, instant_recovery))
 
-    @match_regex('get current live mounts of vmware VM (?P<vm_name>[\w\'-]+)')
+    @match_regex('get live mounts of vmware vm (?P<vm_name>[\w\'-]+)')
     async def getvspherelivemounts(self, message):
         """
         A skills function to list the current live mounts of a VMware VM. The parser looks for the message argument.
 
         Arguments:
-            message {str} -- get current live mounts of vmware VM {vm_name}
+            message {str} -- get current live mounts of vmware vm {vm_name}
         """
         rubrik = rubrik_cdm.Connect()
         vm_name = message.regex.group('vm_name')
         live_mount = rubrik.get_vsphere_live_mount(vm_name)
         live_mount_names = rubrik.get_vsphere_live_mount_names(vm_name)
         await message.respond('All done! {} has the following live mounts: {}. Response: {}'.format(vm_name, live_mount_names,live_mount))
+
+    @match_regex('get live mount names of vmware vm (?P<vm_name>[\w\'-]+)')
+    async def getvspherelivemountnames(self, message):
+        """
+        A skills function to list the current live mounts of a VMware VM. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get live mount names of vmware vm {vm_name}
+        """
+        rubrik = rubrik_cdm.Connect()
+        vm_name = message.regex.group('vm_name')
+        live_mount = rubrik.get_vsphere_live_mount_names(vm_name)
+        await message.respond('All done! {} has the following live mounts: {}.'.format(vm_name, live_mount))
+    
