@@ -181,7 +181,7 @@ class RubrikSkill(Skill):
         A skills function to list the current live mounts of a VMware VM. The parser looks for the message argument.
 
         Arguments:
-            message {str} -- get current live mounts of vmware vm {vm_name}
+            message {str} -- get live mounts of vmware vm {vm_name}
         """
         rubrik = rubrik_cdm.Connect()
         vm_name = message.regex.group('vm_name')
@@ -201,4 +201,3 @@ class RubrikSkill(Skill):
         vm_name = message.regex.group('vm_name')
         live_mount = rubrik.get_vsphere_live_mount_names(vm_name)
         await message.respond('All done! {} has the following live mounts: {}.'.format(vm_name, live_mount))
-    
