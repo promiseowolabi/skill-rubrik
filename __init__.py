@@ -213,6 +213,7 @@ class RubrikSkill(Skill):
         rubrik = rubrik_cdm.Connect()
         db_name = message.regex.group('db_name')
         sql_instance = message.regex.group('sql_instance')
-        sql_host = message.regex.group('sql_host')
+        sql_hostname = message.regex.group('sql_host')
+        sql_host = _hostname_to_text(sql_hostname)
         live_mount = rubrik.get_sql_live_mount(db_name, sql_instance, sql_host)
         await message.respond('All done! {} has the following live mounts: {}.'.format(db_name, live_mount))
