@@ -132,6 +132,30 @@ class RubrikSkill(Skill):
         rubrik = rubrik_cdm.Connect()
         version = rubrik.cluster_version()
         await message.respond('All done! The current Rubrik cluster version is: {}'.format(version))
+
+    @match_regex('get rubrik cluster node ip\'s')
+    async def getclusternodeips(self, message):
+        """
+        A skills function to get the rubrik cluster node ip's. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get rubrik cluster node ip's
+        """
+        rubrik = rubrik_cdm.Connect()
+        node_ip = rubrik.cluster_node_ip()
+        await message.respond('All done! The current Rubrik cluster node ip\'s are: {}'.format(node_ip)) 
+
+    @match_regex('get rubrik cluster node names')
+    async def getclusternodename(self, message):
+        """
+        A skills function to get the rubrik cluster node names. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get rubrik cluster node names
+        """
+        rubrik = rubrik_cdm.Connect()
+        node_names = rubrik.cluster_node_name()
+        await message.respond('All done! The current Rubrik cluster node names are: {}'.format(node_names)) 
     
     @match_regex('get vmware VMs protected by (?P<sla>[\w\'-]+)')
     async def objectsinsla(self, message):
