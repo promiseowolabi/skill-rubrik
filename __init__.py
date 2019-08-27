@@ -176,7 +176,7 @@ class RubrikSkill(Skill):
         await message.respond('All done! {} has been recovered to {} at {}. Response: {}'.format(vm_name, date, time, instant_recovery))
 
     @match_regex('get live mounts of vmware vm (?P<vm_name>[\w\'-]+)')
-    async def getvspherelivemounts(self, message):
+    async def getvspherelivemount(self, message):
         """
         A skills function to list the current live mounts of a VMware VM. The parser looks for the message argument.
 
@@ -187,7 +187,7 @@ class RubrikSkill(Skill):
         vm_name = message.regex.group('vm_name')
         live_mount = rubrik.get_vsphere_live_mount(vm_name)
         live_mount_names = rubrik.get_vsphere_live_mount_names(vm_name)
-        await message.respond('All done! {} has the following live mounts: {}. Response: {}'.format(vm_name, live_mount_names,live_mount))
+        await message.respond('All done! {} has the following live mounts: {}. Response: {}'.format(vm_name, live_mount_names, live_mount))
 
     @match_regex('get live mount names of vmware vm (?P<vm_name>[\w\'-]+)')
     async def getvspherelivemountnames(self, message):
@@ -201,3 +201,18 @@ class RubrikSkill(Skill):
         vm_name = message.regex.group('vm_name')
         live_mount = rubrik.get_vsphere_live_mount_names(vm_name)
         await message.respond('All done! {} has the following live mounts: {}.'.format(vm_name, live_mount))
+
+    @match_regex('get live mounts of sql db (?P<db_name>[\w\'-]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
+    async def getsqllivemount(self, message):
+        """
+        A skills function to list the current live mounts of a MSSQL database. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get live mount names of sql db {db_name} on {sql_instance} on host {sql_host}
+        """
+        rubrik = rubrik_cdm.Connect()
+        db_name = message.regex.group('db_name')
+        sql_instance = message.regex.group('sql_instance')
+        sql_host = message.regex.group('sql_host')
+        live_mount = rubrik.get_sql_live_mount(db_name, sql_instance, sql_host)
+        await message.respond('All done! {} has the following live mounts: {}.'.format(db_name, live_mount))
