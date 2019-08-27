@@ -205,7 +205,7 @@ class RubrikSkill(Skill):
     @match_regex('get live mounts of sql db (?P<db_name>[\w\'-]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
     async def getsqllivemount(self, message):
         """
-        A skills function to list the current live mounts of a MSSQL database. The parser looks for the message argument.
+        A skills function to list the current live mounts of an MSSQL database. The parser looks for the message argument.
 
         Arguments:
             message {str} -- get live mount names of sql db {db_name} on {sql_instance} on host {sql_host}
