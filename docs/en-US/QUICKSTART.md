@@ -93,9 +93,9 @@ On you chosen chat service, these are the example messages based on regex_matche
 * `take a snapshot of ahv vm {vm_name}`
 * `add physical host {hostname}`
 * `get rubrik cluster version`
-* `get vmware VMs protected by {sla}`
-* `perform instant recovery of vmware VM {vm_name} from {MM-DD-YYYY} at {HH:MM AM/PM}`
-* `perform instant recovery of vmware VM {vm_name}`
+* `get vmware vm's protected by {sla}`
+* `perform instant recovery of vmware vm {vm_name} from {MM-DD-YYYY} at {HH:MM AM/PM}`
+* `perform instant recovery of vmware vm {vm_name}`
 * `get live mounts of vmware vm {vm_name}`
 * `get live mount names of vmware vm {vm_name}`
 * `get live mounts of sql db {db_name} on {sql_instance} on host {sql_host}`

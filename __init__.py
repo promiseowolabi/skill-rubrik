@@ -169,7 +169,7 @@ class RubrikSkill(Skill):
         node_id = rubrik.cluster_node_id()
         await message.respond('All done! The current Rubrik cluster node id\'s are: {}'.format(node_id)) 
 
-    @match_regex('get vmware VMs protected by (?P<sla>[\w\'-]+)')
+    @match_regex('get vmware vm\'s protected by (?P<sla>[\w\'-]+)')
     async def objectsinsla(self, message):
         """
         A skills function to get the objects protected by a Rubrik SLA. The parser looks for the message argument.
