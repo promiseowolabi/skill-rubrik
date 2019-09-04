@@ -78,7 +78,7 @@ $ opsdroid
 ```
 ## :mag: Usage
 
-On you chosen chat service, these are the example messages based on regex_matches the skill will respond to:
+On you chosen chat service, these are some example messages based on regex_matches the skill will respond to, refer to the Quickstart documentation for a complete list:
 
 * `take a snapshot of vmware vm {vm_name}`
 * `take a snapshot of mssql_db {db_name} on {sql_instance} on host {sql_host}`
