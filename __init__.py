@@ -183,7 +183,7 @@ class RubrikSkill(Skill):
         objects_in_sla = rubrik.get_sla_objects(sla, object_type)
         await message.respond('All done! The current VMs protected by SLA {} are: {}'.format(sla, objects_in_sla))
 
-    @match_regex('perform instant recovery of vmware VM (?P<vm_name>[\w\'-]+)')
+    @match_regex('perform instant recovery of vmware vm (?P<vm_name>[\w\'-]+)')
     async def vsphereinstantrecoverylatest(self, message):
         """
         A skills function to perform vmware instant recovery. The parser looks for the message argument.
@@ -196,7 +196,7 @@ class RubrikSkill(Skill):
         instant_recovery = rubrik.vsphere_instant_recovery(vm_name)
         await message.respond('All done! {} has been recovered from the latest snapshot. Response: {}'.format(vm_name, instant_recovery))
     
-    @match_regex('perform instant recovery of vmware VM (?P<vm_name>[\w\'-]+) from (?P<date>[\w\'-]+) at (?P<time>[0-9:]+\s[AMP]+)')
+    @match_regex('perform instant recovery of vmware vm (?P<vm_name>[\w\'-]+) from (?P<date>[\w\'-]+) at (?P<time>[0-9:]+\s[AMP]+)')
     async def vsphereinstantrecovery(self, message):
         """
         A skills function to perform vmware instant recovery. The parser looks for the message argument.
