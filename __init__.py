@@ -253,3 +253,21 @@ class RubrikSkill(Skill):
         sql_host = _hostname_to_text(sql_hostname)
         live_mount = rubrik.get_sql_live_mount(db_name, sql_instance, sql_host)
         await message.respond('All done! {} has the following live mounts: {}.'.format(db_name, live_mount))
+
+    @match_regex('perform instant recovery of sql db (?P<db_name>[\w\'-]+) from (?P<date>[\w\'-]+) at (?P<time>[0-9:]+\s[AMP]+) on (?P<sql_instance>[\w-]+) on host (?P<sql_host>.+)')
+    async def sqlinstantrecovery(self, message):
+        """
+        A skills function to perform instant recovery of an MSSQL database. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- perform instant recovery of sql db {db_name} from {date} at {time} on {sql_instance} on host {sql_host}
+        """
+        rubrik = rubrik_cdm.Connect()
+        db_name = message.regex.group('db_name')
+        date = message.regex.group('date')
+        time = message.regex.group('time')
+        sql_instance = message.regex.group('sql_instance')
+        sql_hostname = message.regex.group('sql_host')
+        sql_host = _hostname_to_text(sql_hostname)
+        instant_recovery = rubrik.sql_instant_recovery(db_name, date, time, sql_instance, sql_host)
+        await message.respond('All done! {} will be recovered to {} at {}: {}.'.format(db_name, date, time, instant_recovery))
