@@ -271,3 +271,19 @@ class RubrikSkill(Skill):
         sql_host = _hostname_to_text(sql_hostname)
         instant_recovery = rubrik.sql_instant_recovery(db_name, date, time, sql_instance, sql_host)
         await message.respond('All done! {} will be recovered to {} at {}: {}.'.format(db_name, date, time, instant_recovery))
+
+    @match_regex('add (?P<share_type>[\w\'-]+) share (?P<export_point>[\w\'-\/]+) to (?P<host>.+)')
+    async def addhostshare(self, message):
+        """
+        A skills function to add a share object to a host. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- add {type} share {export_point} to {hostname}
+        """
+        rubrik = rubrik_cdm.Connect()
+        share_type = message.regex.group('share_type')
+        export_point = message.regex.group('export_point')
+        host = message.regex.group('host')
+        hostname = _hostname_to_text(host)
+        add_share = rubrik.add_host_share(hostname, share_type, export_point)
+        await message.respond('All done! Share object {} has been added to host {}. Response: {}'.format(export_point, hostname, add_share))
