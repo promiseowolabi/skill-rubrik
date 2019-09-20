@@ -287,3 +287,21 @@ class RubrikSkill(Skill):
         hostname = _hostname_to_text(host)
         add_share = rubrik.add_host_share(hostname, share_type, export_point)
         await message.respond('All done! Share object {} has been added to host {}. Response: {}'.format(export_point, hostname, add_share))
+
+    @match_regex('assign (?P<object_type>[\w\'-]+) (?P<name>[\w\'-]+) on share (?P<share>[\w\'-\/]+) (?P<sla_name>[\w\'-]+) sla on (?P<host>.+)')
+    async def assignslafileset(self, message):
+        """
+        A skills function to assign an SLA to a share fileset for a host. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- assign fileset {name} on share {share} {sla} sla on {host}
+        """
+        rubrik = rubrik_cdm.Connect()
+        object_type = message.regex.group('object_type')
+        object_name = message.regex.group('name')
+        share = message.regex.group('share')
+        sla_name = message.regex.group('sla_name')
+        host = message.regex.group('host')
+        nas_host = _hostname_to_text(host)
+        assign_sla = rubrik.assign_sla(object_name, sla_name, object_type, nas_host=nas_host, share=share)
+        await message.respond('All done! Fileset {} on share {} assigned sla {} on host {}. Response: {}'.format(object_name, share, sla_name, nas_host, assign_sla))
