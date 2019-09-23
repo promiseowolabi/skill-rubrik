@@ -278,7 +278,7 @@ class RubrikSkill(Skill):
         A skills function to add a share object to a host. The parser looks for the message argument.
 
         Arguments:
-            message {str} -- add {type} share {export_point} to {hostname}
+            message {str} -- add {share_type} share {export_point} to {hostname}
         """
         rubrik = rubrik_cdm.Connect()
         share_type = message.regex.group('share_type')
@@ -294,7 +294,7 @@ class RubrikSkill(Skill):
         A skills function to assign an SLA to a share fileset for a host. The parser looks for the message argument.
 
         Arguments:
-            message {str} -- assign fileset {name} on share {share} {sla} sla on {host}
+            message {str} -- assign {object_type} {name} on share {share} {sla} sla on {host}
         """
         rubrik = rubrik_cdm.Connect()
         object_type = message.regex.group('object_type')
