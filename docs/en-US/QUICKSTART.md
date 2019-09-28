@@ -105,6 +105,7 @@ On you chosen chat service, these are the example messages based on regex_matche
 * `perform instant recovery of sql db {db_name} from {date} at {time} on {sql_instance} on host {sql_host}`
 * `add {share_type} share {export_point} to {hostname}`
 * `assign {object_type} {name} on share {share} {sla} sla on {host}`
+* `get vmware vm {vm_name}`
 
 Slack: Enclose hostname/sql_host values in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause hostname not found errors.
 

@@ -305,3 +305,16 @@ class RubrikSkill(Skill):
         nas_host = _hostname_to_text(host)
         assign_sla = rubrik.assign_sla(object_name, sla_name, object_type, nas_host=nas_host, share=share)
         await message.respond('All done! Fileset {} on share {} assigned sla {} on host {}. Response: {}'.format(object_name, share, sla_name, nas_host, assign_sla))
+
+    @match_regex('get vmware vm (?P<vm_name>[\w\'-]+)')
+    async def getvspherevm(self, message):
+        """
+        A skills function to get summary of a VMware VM. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get vmware vm {vm_name}
+        """
+        rubrik = rubrik_cdm.Connect()
+        vm_name = message.regex.group('vm_name')
+        get_vm = rubrik.get_vsphere_vm(name=vm_name)
+        await message.respond('All done! : Summary of VMware VM {}. Response: {}'.format(vm_name, get_vm))
