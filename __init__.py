@@ -307,6 +307,7 @@ class RubrikSkill(Skill):
         await message.respond('All done! Fileset {} on share {} assigned sla {} on host {}. Response: {}'.format(object_name, share, sla_name, nas_host, assign_sla))
 
     @match_regex('get vmware vm (?P<vm_name>[\w\'-]+)')
+    @match_regex('get vm (?P<vm_name>[\w\'-]+)')
     async def getvspherevm(self, message):
         """
         A skills function to get summary of a VMware VM. The parser looks for the message argument.
@@ -318,3 +319,32 @@ class RubrikSkill(Skill):
         vm_name = message.regex.group('vm_name')
         get_vm = rubrik.get_vsphere_vm(name=vm_name)
         await message.respond('All done! : Summary of VMware VM {}. Response: {}'.format(vm_name, get_vm))
+
+    @match_regex('get vmware vm (?P<vm_id>[\w\':-]+) details')
+    @match_regex('get vm (?P<vm_id>[\w\':-]+) details')
+    async def getvspherevmdetails(self, message):
+        """
+        A skills function to get details of a VMware VM. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get vmware vm {vm_id} details
+        """
+        rubrik = rubrik_cdm.Connect()
+        vm_id = message.regex.group('vm_id')
+        get_vm = rubrik.get_vsphere_vm_details(id=vm_id)
+        await message.respond('All done! : Details of VMware VM {}. Response: {}'.format(vm_id, get_vm))
+
+    @match_regex('get vmware vm (?P<vm_id>[\w\':-]+) snapshots')
+    @match_regex('get vm (?P<vm_id>[\w\':-]+) snapshots')
+    @match_regex('get vm (?P<vm_id>[\w\':-]+) snaps')
+    async def getvspherevmsnapshots(self, message):
+        """
+        A skills function to get snapshots of a VMware VM. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get vmware vm {vm_id} snapshots
+        """
+        rubrik = rubrik_cdm.Connect()
+        vm_id = message.regex.group('vm_id')
+        get_vm = rubrik.get_vsphere_vm_snapshot(id=vm_id)
+        await message.respond('All done! : Snapshots of VMware VM {}. Response: {}'.format(vm_id, get_vm))
