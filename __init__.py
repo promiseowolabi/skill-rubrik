@@ -364,3 +364,20 @@ class RubrikSkill(Skill):
         path = message.regex.group('path')
         get_vm = rubrik.get_vsphere_vm_file(vm_name, path=path)
         await message.respond('All done! : Search results of VMware VM {}. Response: {}'.format(vm_name, get_vm))
+
+    @match_regex('get sql db (?P<db_name>[\w\'-]+) on host (?P<hostname>.+)')
+    @match_regex('get db (?P<db_name>[\w\'-]+) on (?P<hostname>.+)')
+    @match_regex('get db (?P<db_name>[\w\'-]+)')
+    async def getsqldb(self, message):
+        """
+        A skills function to get details of a mssql database. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get sql db {db_name} on host {hostname}
+        """
+        rubrik = rubrik_cdm.Connect()
+        db_name = message.regex.group('db_name')
+        sql_hostname = message.regex.group('hostname')
+        hostname = _hostname_to_text(sql_hostname)
+        get_db = rubrik.get_sql_db(db_name=db_name, hostname=hostname)
+        await message.respond('All done! : Search results of MSSQL db {} on {}. Response: {}'.format(db_name, hostname, get_db))
