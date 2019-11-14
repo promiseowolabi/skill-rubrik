@@ -110,6 +110,7 @@ On you chosen chat service, these are the example messages based on regex_matche
 * `get vmware vm {id} snapshots` or `get vm {id} snapshots` or `get vm {id} snaps`
 * `get sql db {db_name} on host {hostname}` or `get db {db_name} on {hostname}` or `get db {db_name}`
 * `get sql db files for {db_name} from {date} {time} on {sql_instance} host {hostname}`
+* `begin managed volume (?P<mv_name>[\w\'-]+) snapshot` or `begin mv (?P<mv_name>[\w\'-]+) snapshot`
 
 Slack: Enclose hostname/sql_host values in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause hostname not found errors.
 
