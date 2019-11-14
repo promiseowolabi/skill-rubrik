@@ -401,3 +401,17 @@ class RubrikSkill(Skill):
         sql_host = _hostname_to_text(hostname)
         get_db_files = rubrik.get_sql_db_files(db_name, date, time, sql_instance, sql_host)
         await message.respond('All done! : Search results of MSSQL db {} files on {}. Response: {}'.format(db_name, hostname, get_db_files))
+
+    @match_regex('begin managed volume (?P<mv_name>[\w\'-]+) snapshot')
+    @match_regex('begin mv (?P<mv_name>[\w\'-]+) snapshot')
+    async def beginmvsnapshot(self, message):
+        """
+        A skills function to start a managed volume snapshot. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- begin managed volume {mv_name} snapshot
+        """
+        rubrik = rubrik_cdm.Connect()
+        mv_name = message.regex.group('mv_name')
+        start_mv = rubrik.begin_managed_volume_snapshot(name=mv_name)
+        await message.respond('All done! : Starting managed volume snapshot "{}". Response: {}'.format(mv_name, start_mv))
