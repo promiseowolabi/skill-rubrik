@@ -415,3 +415,18 @@ class RubrikSkill(Skill):
         mv_name = message.regex.group('mv_name')
         start_mv = rubrik.begin_managed_volume_snapshot(name=mv_name)
         await message.respond('All done! : Starting managed volume snapshot "{}". Response: {}'.format(mv_name, start_mv))
+
+    @match_regex('end managed volume (?P<mv_name>[\w\'-]+) snapshot with sla (?P<sla_name>[\w\'-]+)')
+    @match_regex('end mv (?P<mv_name>[\w\'-]+) snapshot with sla (?P<sla_name>[\w\'-]+)')
+    async def endmvsnapshot(self, message):
+        """
+        A skills function to start a managed volume snapshot. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- end managed volume {mv_name} snapshot with sla {sla_name}
+        """
+        rubrik = rubrik_cdm.Connect()
+        mv_name = message.regex.group('mv_name')
+        sla_name = message.regex.group('sla_name')
+        end_mv = rubrik.end_managed_volume_snapshot(name=mv_name, sla_name=sla_name)
+        await message.respond('All done! : Ending managed volume snapshot "{}". Response: {}'.format(mv_name, end_mv))
