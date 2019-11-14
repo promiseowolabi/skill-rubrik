@@ -381,3 +381,23 @@ class RubrikSkill(Skill):
         hostname = _hostname_to_text(sql_hostname)
         get_db = rubrik.get_sql_db(db_name=db_name, hostname=hostname)
         await message.respond('All done! : Search results of MSSQL db {} on {}. Response: {}'.format(db_name, hostname, get_db))
+
+    @match_regex('get sql db files for (?P<db_name>[\w\'-]+) from (?P<date>[\w\'-]+) (?P<time>[0-9:]+\s[AMP]+) on (?P<sql_instance>[\w-]+) host (?P<hostname>.+)')
+    @match_regex('get db files for (?P<db_name>[\w\'-]+) from (?P<date>[\w\'-]+) (?P<time>[0-9:]+\s[AMP]+) on (?P<sql_instance>[\w-]+) host (?P<hostname>.+)')
+    async def getsqldbfiles(self, message):
+        """
+        A skills function to get details of a mssql database files. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- get sql db files for {db_name} from {date} {time} on {sql_instance} host {hostname}
+             host {hostname}
+        """
+        rubrik = rubrik_cdm.Connect()
+        db_name = message.regex.group('db_name')
+        date = message.regex.group('date')
+        time = message.regex.group('time')
+        sql_instance = message.regex.group('sql_instance')
+        hostname = message.regex.group('hostname')
+        sql_host = _hostname_to_text(hostname)
+        get_db_files = rubrik.get_sql_db_files(db_name, date, time, sql_instance, sql_host)
+        await message.respond('All done! : Search results of MSSQL db {} files on {}. Response: {}'.format(db_name, hostname, get_db_files))
