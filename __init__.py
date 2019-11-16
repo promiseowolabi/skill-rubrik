@@ -445,3 +445,17 @@ class RubrikSkill(Skill):
         object_type = message.regex.group('object_type')
         pause_snapshot = rubrik.pause_snapshots(object_name=object_name, object_type=object_type)
         await message.respond('All done! : Pausing snapshot for "{}". Response: {}'.format(object_name, pause_snapshot))
+
+    @match_regex('resume (?P<object_name>[\w\'-]+) (?P<object_type>[\w\'-]+) snapshot')
+    async def resumesnapshot(self, message):
+        """
+        A skills function to resume a snapshot. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- resume {object_name} {object_type} snapshot
+        """
+        rubrik = rubrik_cdm.Connect()
+        object_name = message.regex.group('object_name')
+        object_type = message.regex.group('object_type')
+        resume_snapshot = rubrik.resume_snapshots(object_name=object_name, object_type=object_type)
+        await message.respond('All done! : Pausing snapshot for "{}". Response: {}'.format(object_name, resume_snapshot))
