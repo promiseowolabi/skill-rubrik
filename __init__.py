@@ -97,6 +97,8 @@ class RubrikSkill(Skill):
         if object_type == 'vmware' or object_type == 'ahv':
             vm_name = message.regex.group('object_name')
             snapshot = rubrik.on_demand_snapshot(vm_name, object_type)
+            await message.respond('All done! A snapshot of {} has been taken. Response: {}'.format(vm_name, snapshot))
+
         else:
             db_name = message.regex.group('object_name')
             sql_db = message.regex.group('object_name')
@@ -104,8 +106,7 @@ class RubrikSkill(Skill):
             sql_hostname = message.regex.group('sql_host')
             sql_host = _hostname_to_text(sql_hostname)
             snapshot = rubrik.on_demand_snapshot(db_name, object_type, sql_host=sql_host, sql_instance=sql_instance, sql_db=sql_db)
-        
-        await message.respond('All done! A snapshot of {} has been taken. Response: {}'.format(db_name, snapshot))
+            await message.respond('All done! A snapshot of {} has been taken. Response: {}'.format(db_name, snapshot))
 
     @match_regex('add physical host (?P<hostname>.+)')
     async def addphysicalhost(self, message):
@@ -430,3 +431,17 @@ class RubrikSkill(Skill):
         sla_name = message.regex.group('sla_name')
         end_mv = rubrik.end_managed_volume_snapshot(name=mv_name, sla_name=sla_name)
         await message.respond('All done! : Ending managed volume snapshot "{}". Response: {}'.format(mv_name, end_mv))
+
+    @match_regex('pause (?P<object_name>[\w\'-]+) (?P<object_type>[\w\'-]+) snapshot')
+    async def pausesnapshot(self, message):
+        """
+        A skills function to pause a snapshot. The parser looks for the message argument.
+
+        Arguments:
+            message {str} -- pause {object_name} {object_type} snapshot
+        """
+        rubrik = rubrik_cdm.Connect()
+        object_name = message.regex.group('object_name')
+        object_type = message.regex.group('object_type')
+        pause_snapshot = rubrik.pause_snapshots(object_name=object_name, object_type=object_type)
+        await message.respond('All done! : Pausing snapshot for "{}". Response: {}'.format(object_name, pause_snapshot))
