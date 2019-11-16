@@ -113,6 +113,7 @@ On you chosen chat service, these are the example messages based on regex_matche
 * `begin managed volume (?P<mv_name>[\w\'-]+) snapshot` or `begin mv (?P<mv_name>[\w\'-]+) snapshot`
 * `end managed volume {mv_name} snapshot with sla {sla_name}` or `end mv {mv_name} snapshot with sla {sla_name}`
 * `pause {object_name} {object_type} snapshot`
+* `resume {object_name} {object_type} snapshot`
 
 Slack: Enclose hostname/sql_host values in < > i.e. <sqlhost.rubrikdemo.com> to avoid Slack unfurling which cause hostname not found errors.
 
